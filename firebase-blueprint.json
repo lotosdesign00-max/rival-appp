@@ -1,0 +1,291 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile & Settings",
+      "description": "User profile, settings and simple app states.",
+      "type": "object",
+      "properties": {
+        "favorites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recentSearches": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "academyProgress": {
+          "type": "object"
+        },
+        "aiCredits": {
+          "type": "number"
+        },
+        "isPro": {
+          "type": "boolean"
+        },
+        "ownerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ownerId"
+      ]
+    },
+    "OrderRequest": {
+      "title": "Order Request",
+      "description": "A user's order request.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "projectType": {
+          "type": "string"
+        },
+        "environmentStyle": {
+          "type": "string"
+        },
+        "budget": {
+          "type": "string"
+        },
+        "timeline": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "telegram": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "pending",
+            "in_review",
+            "approved"
+          ]
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "ownerId",
+        "status",
+        "createdAt"
+      ]
+    },
+    "HistoryItem": {
+      "title": "AI History Item",
+      "description": "History of AI generations.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "ownerId",
+        "title",
+        "category",
+        "timestamp"
+      ]
+    },
+    "NotificationItem": {
+      "title": "Notification Item",
+      "description": "User notifications.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "isUnread": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "ownerId",
+        "title",
+        "message",
+        "time"
+      ]
+    },
+    "Chat": {
+      "title": "Chat Session",
+      "description": "A conversation thread for support, direct messages, or orders.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "support",
+            "direct",
+            "order"
+          ]
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "participantId": {
+          "type": "string"
+        },
+        "participantName": {
+          "type": "string"
+        },
+        "participantAvatar": {
+          "type": "string"
+        },
+        "unreadCount": {
+          "type": "number"
+        },
+        "lastMessageText": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "ownerId": {
+          "type": "string"
+        },
+        "userTypingUntil": {
+          "type": "number"
+        },
+        "adminTypingUntil": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "ownerId",
+        "updatedAt"
+      ]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "A single message in a chat.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "senderId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "fileUrl": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "ownerId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "senderId",
+        "timestamp",
+        "ownerId"
+      ]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User document containing profile and settings"
+    },
+    "users/{userId}/orders/{orderId}": {
+      "schema": {
+        "$ref": "#/entities/OrderRequest"
+      },
+      "description": "Orders created by the user"
+    },
+    "users/{userId}/aiHistory/{historyId}": {
+      "schema": {
+        "$ref": "#/entities/HistoryItem"
+      },
+      "description": "AI History of the user"
+    },
+    "users/{userId}/notifications/{notificationId}": {
+      "schema": {
+        "$ref": "#/entities/NotificationItem"
+      },
+      "description": "Notifications for the user"
+    },
+    "users/{userId}/chats/{chatId}": {
+      "schema": {
+        "$ref": "#/entities/Chat"
+      },
+      "description": "Chat sessions belonging to the user."
+    },
+    "users/{userId}/chats/{chatId}/messages/{messageId}": {
+      "schema": {
+        "$ref": "#/entities/Message"
+      },
+      "description": "Messages within a chat session."
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Rival Space",
+  "description": "Rival Space — Performance by Design digital environment platform with gallery, academy, reviews, order creation, and interactive spatial environment explorer.",
+  "requestFramePermissions": ["microphone", "camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
