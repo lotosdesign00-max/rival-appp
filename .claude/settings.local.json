@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(node qa.mjs)",
+      "Bash(QA_BASE=http://localhost:5200 node qa.mjs)"
+    ]
+  }
+}
